@@ -1,12 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './header.styles.scss';
 
-import {ReactComponent as Logo} from '../../assets/logo.svg';
+// Firebase 
+import { auth } from '../../firebase/firebase.utils.js';
 
-const Header = () => {
-  return ( 
+import { ReactComponent as Logo } from '../../assets/logo.svg';
+
+const Header = ({ currentUser }) => {
+  return (
     <div className='header'>
       <Link to='/' className='logo-container'>
         <Logo className='logo' />
@@ -18,10 +21,20 @@ const Header = () => {
         <Link className='option' to='/contact'>
           CONTACT
         </Link>
+        {
+          currentUser ?
+            <div className='option' onClick={ () => auth.signOut() }>
+              SIGN OUT
+            </div>
+            :
+            <Link className='option' to='/signin'>
+              SIGN IN
+            </Link>
+        }
       </div>
 
     </div>
-   );
+  );
 }
- 
+
 export default Header;
