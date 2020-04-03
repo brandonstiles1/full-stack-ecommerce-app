@@ -1,5 +1,6 @@
 import React from 'react';
 import './cart-dropdown.styles.scss';
+import { createStructuredSelector } from 'reselect';
 
 // Components
 import CustomButton from '../custom-button/custom-button.component';
@@ -22,8 +23,8 @@ const CartDropdown = ({ cartItems }) => (
   </div>
 );
 
-const mapStateToProps = state => ({
-  cartItems: selectCartItems(state)
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems
 });
 
 
