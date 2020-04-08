@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import './header.styles.scss';
 
 // Redux
 import { connect } from 'react-redux';
@@ -12,7 +10,7 @@ import { selectCurrentUser } from '../../redux/user/user.selector';
 import { auth } from '../../firebase/firebase.utils.js';
 
 // Styles
-import { LogoContainer, OptionsContainer, OptionDiv, OptionLink, HeaderContainer } from './header.styles'
+import { LogoContainer, OptionsContainer, OptionLink, HeaderContainer } from './header.styles'
 
 // Components
 import { ReactComponent as Logo } from '../../assets/logo.svg';
@@ -34,9 +32,9 @@ const Header = ({ currentUser, hidden }) => {
         </OptionLink>
         {
           currentUser ?
-            <OptionDiv onClick={ () => auth.signOut() }>
+            <OptionLink as='div' onClick={ () => auth.signOut() }>
               SIGN OUT
-            </OptionDiv>
+            </OptionLink>
             :
             <OptionLink to='/signin'>
               SIGN IN
@@ -44,10 +42,11 @@ const Header = ({ currentUser, hidden }) => {
         }
         <CartIcon />
       </OptionsContainer>
-      { hidden ? null :
-        <CartDropdown />
+      {
+        hidden ? null :
+          <CartDropdown />
       }
-    </HeaderContainer>
+    </HeaderContainer >
   );
 }
 
